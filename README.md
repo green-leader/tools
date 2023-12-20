@@ -8,3 +8,5 @@ Single Page Applications
 [Random IP Address](RandomIP.html)
 
 [Town Names](TownNames.html)
+
+[Basic Weather](BasicWeather.html)
