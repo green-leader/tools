@@ -10,3 +10,5 @@ Single Page Applications
 [Town Names](TownNames.html)
 
 [Basic Weather](BasicWeather.html)
+
+[Advanced Weather](AdvancedWeather.html)
