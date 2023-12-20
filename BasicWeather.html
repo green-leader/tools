@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Basic Weather Generator</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+  <body>
+    <div id="output"></div>
+
+    <script>
+const weatherTable = ["Sunny", "Cloudy", "Partly Cloudy", "Rainy", "Snowy", "Sleet", "Stormy", "Lightning", "Thunder", "Hail", "Windy", "Foggy", "Ice", "Tornado", "Rainbows", "Clear Sky"];
+
+function generateWeather() {
+    const weatherSelection = weatherTable[Math.floor(Math.random() * weatherTable.length)];
+    return `<strong>Weather:</strong> ${weatherSelection}`;
+}
+
+document.getElementById("output").innerHTML = generateWeather();
+    </script>
+  </body>
+</html>
