@@ -12,3 +12,7 @@ Single Page Applications
 [Basic Weather](BasicWeather.html)
 
 [Advanced Weather](AdvancedWeather.html)
+
+[URL Adjustment](URLAdjust.html)
+
+[Hackmaster Event Table](HackmasterEventTable.html)

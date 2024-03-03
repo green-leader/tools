@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Adjust URL's</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+  <body>
+    Sometimes adjusting URLs on your phone sucks.
+    <br>
+    <form onsubmit="return false;">
+      <input type="text" id="url" value="https://youtube.com/shorts/A1pLp_E78f0?si=Y4D5BlNdjpJjVxIo" placeholder="https://example.com">
+      <input type="submit" id="btnSubmit" value="Submit">
+      <br>
+      <input type="radio" id="markdown" name="formatStyle" value="markdown">
+      <label for="markdown">Markdown</label>
+      <input type="radio" id="amazon" name="formatStyle" value="amazon">
+      <label for="amazon">Amazon Link</label>
+    </form>
+    <br>
+    <div id="output"></div>
+
+    <script>
+
+function formatMarkdown() {
+  let url = document.getElementById('url');
+  if (url.value == "") {
+    return;
+  }
+  let linkText = url.value.replace(/https\:\/\/|http\:\/\//i, "");
+  // [example.com](https://example.com)
+  let returnValue = "[" + (linkText) + "](" + (url.value) + ")";
+  document.getElementById("output").innerHTML = returnValue;
+}
+ 
+function formatAmazon() {
+  const url = document.getElementById('url');
+  if (url.value == "") {
+    return;
+  }
+  let short = url.value;
+
+  const lastIndex = short.lastIndexOf('/');
+  if (lastIndex !== -1) {
+    short = short.slice(0,lastIndex+1);
+  }
+
+  document.getElementById("output").innerHTML = short.toString();
+}
+
+function formatSelection() {
+  let formatSelect;
+  const radioButtons = document.querySelectorAll('input[name="formatStyle"]');
+  for (const radioButton of radioButtons) {
+    if (radioButton.checked) {
+      formatSelect = radioButton.value;
+      break;
+    }
+  }
+  if ( formatSelect === "markdown"){
+    formatMarkdown();
+  }
+  if ( formatSelect === "amazon"){
+    formatAmazon();
+  }
+}
+
+let urlForm = document.getElementById('url');
+urlForm.addEventListener("keyup", (event) => {
+  if (event.code !== 'Enter' && event.code !== 'NumpadEnter')
+  {
+    return;
+  }
+  formatSelection();
+});
+
+let buttonSubmit = document.getElementById('btnSubmit');
+buttonSubmit.addEventListener("click", (event) => {
+  formatSelection();
+});
+
+    </script>
+  </body>
+</html>
