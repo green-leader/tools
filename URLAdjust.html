@@ -27,7 +27,11 @@ function formatMarkdown() {
   if (url.value == "") {
     return;
   }
-  let linkText = url.value.replace(/https\:\/\/|http\:\/\//i, "");
+  let linkText = url.value.replace(/\:\/\/www./i, "\:\/\/").replace(/https\:\/\/|http\:\/\//i, "");
+  const lastIndex = linkText.lastIndexOf('?');
+  if (lastIndex !== -1) {
+    linkText = linkText.slice(0,lastIndex);
+  }
   // [example.com](https://example.com)
   let returnValue = "[" + (linkText) + "](" + (url.value) + ")";
   document.getElementById("output").innerHTML = returnValue;
