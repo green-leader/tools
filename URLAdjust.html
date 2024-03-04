@@ -11,6 +11,7 @@
     <form onsubmit="return false;">
       <input type="text" id="url" placeholder="https://example.com">
       <input type="submit" id="btnSubmit" value="Submit">
+      <button onclick="copyFunction()">Copy Text</button>
       <br>
       <input type="radio" id="markdown" name="formatStyle" value="markdown">
       <label for="markdown">Markdown</label>
@@ -21,6 +22,13 @@
     <div id="output"></div>
 
     <script>
+function copyFunction() {
+    var copyText = document.getElementById("output");
+    // copyText.select();
+    // copyText.setSelectionRange(0,99999);
+    navigator.clipboard.writeText(copyText.innerHTML);
+    console.log(copyText.innerHTML)
+}
 
 function formatMarkdown() {
   let url = document.getElementById('url');
