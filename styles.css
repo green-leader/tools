@@ -1,7 +1,98 @@
-body {
-    background-color: black;
-    color: white;
+:root {
+    --bg-dim: #1b1b1b;
+    --bg0: #282828;
+    --bg1: #32302f;
+    --bg2: #32302f;
+    --bg3: #45403d;
+    --bg4: #45403d;
+    --bg5: #5a524c;
+    --bg-statusline1: #32302f;
+    --bg-statusline2: #3a3735;
+    --bg-statusline3: #504945;
+    --bg-diff-green: #34381b;
+    --bg-visual-green: #3b4439;
+    --bg-diff-red: #402120;
+    --bg-visual-red: #4c3432;
+    --bg-diff-blue: #0e363e;
+    --bg-visual-blue: #374141;
+    --bg-visual-yellow: #4f422e;
+    --bg-current-word: #3c3836;
+    --fg0: #d4be98;
+    --fg1: #ddc7a1;
+    --red: #ea6962;
+    --orange: #e78a4e;
+    --yellow: #d8a657;
+    --green: #a9b665;
+    --aqua: #89b482;
+    --blue: #7daea3;
+    --purple: #d3869b;
+    --bg-red: #ea6962;
+    --bg-green: #a9b665;
+    --bg-yellow: #d8a657;
+    --gray0: #7c6f64;
+    --gray1: #928374;
+    --gray2: #a89984;
 }
+
+body {
+    background-color: var(--bg0);
+    color: var(--fg0);
+}
+
+h1 {
+    color: var(--red);
+}
+
+h2 {
+    color: var(--orange);
+}
+
+h3 {
+    color: var(--yellow);
+}
+
+h4 {
+    color: var(--green);
+}
+
+h5 {
+    color: var(--aqua);
+}
+
+h6 {
+    color: var(--blue);
+}
+
+h7 {
+    color: var(--purple);
+}
+
+input[type="text"], textarea {
+    background-color: var(--bg-statusline3); 
+    color: var(--fg0);
+    border: 0px solid var(--bg-statusline3);
+}
+
+::placeholder {
+    color: var(--gray2);
+}
+
+::-webkit-input-placeholder {
+    color: var(--gray2);
+}
+
+::-moz-placeholder {
+    color: var(--gray2);
+}
+
+::-ms-input-placeholder {
+    color: var(--gray2);
+}
+
+::-moz-placeholder {
+    color: var(--gray2);
+}
+
 footer {
     position: absolute;
     bottom: 0;
