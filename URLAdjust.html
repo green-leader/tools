@@ -9,6 +9,8 @@
   <body>
     Sometimes adjusting URLs on your phone sucks.
     <br>
+    Rather opinionated as well.
+    <br>
     <form onsubmit="return false;">
       <input type="text" id="url" placeholder="https://example.com">
       <input type="submit" id="btnSubmit" value="Submit">
@@ -18,6 +20,8 @@
       <label for="markdown">Markdown</label>
       <input type="radio" id="amazon" name="formatStyle" value="amazon">
       <label for="amazon">Amazon Link</label>
+      <input type="radio" id="reddit" name="formatStyle" value="reddit">
+      <label for="reddit">Reddit Link</label>
     </form>
     <br>
     <div id="output"></div>
@@ -25,8 +29,6 @@
     <script>
 function copyFunction() {
     var copyText = document.getElementById("output");
-    // copyText.select();
-    // copyText.setSelectionRange(0,99999);
     navigator.clipboard.writeText(copyText.innerHTML);
     console.log(copyText.innerHTML)
 }
@@ -61,6 +63,23 @@ function formatAmazon() {
   document.getElementById("output").innerHTML = short.toString();
 }
 
+function formatReddit() {
+  let url = document.getElementById('url');
+  if (url.value == "") {
+    return;
+  }
+  let linkText = url.value.replace(/\:\/\/www./i, "\:\/\/")
+  .replace(/https\:\/\/|http\:\/\//i, "")
+  .replace(/reddit.com|old.reddit.com/i, "");
+  const lastIndex = linkText.lastIndexOf('?');
+  if (lastIndex !== -1) {
+    linkText = linkText.slice(0,lastIndex);
+  }
+  // [example.com](https://example.com)
+  let returnValue = "[" + (linkText) + "](" + (url.value) + ")";
+  document.getElementById("output").innerHTML = returnValue;
+}
+
 function formatSelection() {
   let formatSelect;
   const radioButtons = document.querySelectorAll('input[name="formatStyle"]');
@@ -75,6 +94,9 @@ function formatSelection() {
   }
   if ( formatSelect === "amazon"){
     formatAmazon();
+  }
+  if ( formatSelect === "reddit"){
+    formatReddit();
   }
 }
 
