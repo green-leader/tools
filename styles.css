@@ -37,6 +37,8 @@
 body {
     background-color: var(--bg0);
     color: var(--fg0);
+    margin: 5px;
+    padding: 5px;
 }
 
 h1 {
@@ -63,8 +65,9 @@ h6 {
     color: var(--blue);
 }
 
-h7 {
+a {
     color: var(--purple);
+    font-weight: bold;
 }
 
 input[type="text"], textarea {
@@ -91,6 +94,29 @@ input[type="text"], textarea {
 
 ::-moz-placeholder {
     color: var(--gray2);
+}
+
+input[type="submit"],button {
+    background-color: var(--gray2); /* Green */
+    border: 0px solid var(--gray2);
+    border-radius: 8px;
+    color: var(--bg0);
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+}
+
+input[type="submit"]:active,button:active {
+    background-color: var(--gray0); /* Green */
+}
+
+button[disabled], button:disabled{
+    opacity: 0.6;
+    cursor: not-allowed;
+    text-decoration:line-through;
+    pointer-events: none;
 }
 
 footer {
