@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parse a helm repo without adding it locally</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+  <body>
+    <form onsubmit="return false;">
+        <input type="text" id="url" placeholder="https://example.com">
+        <input type="submit" id="btnSubmit" value="Submit">
+      </form>
+    <table id="helmTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Chart Version</th>
+                <th>App Version</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+    <script>
+        let urlForm = document.getElementById('url');
+        urlForm.addEventListener("keyup", (event) => {
+        if (event.code !== 'Enter' && event.code !== 'NumpadEnter')
+        {
+            return;
+        }
+        parseYaml();
+        });
+
+        let buttonSubmit = document.getElementById('btnSubmit');
+        buttonSubmit.addEventListener("click", (event) => {
+        parseYaml();
+        });
+        function parseYaml() {
+            const url = document.getElementById('url');
+            if (url.value == "") {
+                return;
+            }
+            fetch(url.value)
+                .then(r => r.text())
+                .then(r => {
+                    const yaml = jsyaml.load(r);
+                    const tableBody = document.querySelector('#helmTable tbody');
+
+                    for( entry in yaml['entries']) {
+                        let temp = yaml['entries'][entry][0];
+                        let row = tableBody.insertRow();
+                        row.insertCell().textContent = temp.name || '';
+                        row.insertCell().textContent = temp.version || '';
+                        row.insertCell().textContent = temp.appVersion || '';
+                        row.insertCell().textContent = temp.description || '';
+                    }
+                })
+                .catch(err => console.error(err)); // Log any errors
+        }
+    </script>
+</body>
+</html>
