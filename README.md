@@ -16,3 +16,5 @@ Single Page Applications
 [URL Adjustment](URLAdjust.html)
 
 [Hackmaster Event Table](HackmasterEventTable.html)
+
+[Helm Repo Parser](helmrepoparse.html)
