@@ -16,13 +16,13 @@
       <input type="submit" id="btnSubmit" value="Submit">
       <button onclick="copyFunction()">Copy Text</button>
       <br>
-      <input type="radio" id="markdown" name="formatStyle" value="markdown">
+      <input type="radio" id="markdown" name="formatStyle" value="markdown" checked>
       <label for="markdown">Markdown</label>
-      <input type="radio" id="amazon" name="formatStyle" value="amazon">
-      <label for="amazon">Amazon Link</label>
-      <input type="radio" id="reddit" name="formatStyle" value="reddit">
-      <label for="reddit">Reddit Link</label>
+      <input type="radio" id="raw" name="formatStyle" value="raw">
+      <label for="raw">Raw Link</label>
     </form>
+    <input type="checkbox" id="params" name="params" value="true" checked="">
+    <label for="params">Strip Params</label>
     <br>
     <div id="output"></div>
 
@@ -30,53 +30,25 @@
 function copyFunction() {
     var copyText = document.getElementById("output");
     navigator.clipboard.writeText(copyText.innerHTML);
-    console.log(copyText.innerHTML)
 }
 
-function formatMarkdown() {
-  let url = document.getElementById('url');
-  if (url.value == "") {
-    return;
-  }
-  let linkText = url.value.replace(/\:\/\/www./i, "\:\/\/").replace(/https\:\/\/|http\:\/\//i, "");
-  const lastIndex = linkText.lastIndexOf('?');
-  if (lastIndex !== -1) {
-    linkText = linkText.slice(0,lastIndex);
-  }
+function stripParams(url) {
+  const result = url.split('?')[0];
+  return result;
+}
+
+function formatMarkdown(url) {
+  let linkText = url.replace(/\:\/\/www./i, "\:\/\/")
+  .replace(/https\:\/\/|http\:\/\//i, "")
+  .replace(/reddit.com|old.reddit.com/i, "");
+  linkText = stripParams(linkText);
   // [example.com](https://example.com)
-  let returnValue = "[" + (linkText) + "](" + (url.value) + ")";
+  let returnValue = "[" + (linkText) + "](" + (url) + ")";
   document.getElementById("output").innerHTML = returnValue;
 }
  
-function formatAmazon() {
-  const url = document.getElementById('url');
-  if (url.value == "") {
-    return;
-  }
-  let short = url.value;
-
-  const lastIndex = short.lastIndexOf('/');
-  if (lastIndex !== -1) {
-    short = short.slice(0,lastIndex+1);
-  }
-
-  document.getElementById("output").innerHTML = short.toString();
-}
-
-function formatReddit() {
-  let url = document.getElementById('url');
-  if (url.value == "") {
-    return;
-  }
-  let linkText = url.value.replace(/\:\/\/www./i, "\:\/\/")
-  .replace(/https\:\/\/|http\:\/\//i, "")
-  .replace(/reddit.com|old.reddit.com/i, "");
-  const lastIndex = linkText.lastIndexOf('?');
-  if (lastIndex !== -1) {
-    linkText = linkText.slice(0,lastIndex);
-  }
-  // [example.com](https://example.com)
-  let returnValue = "[" + (linkText) + "](" + (url.value) + ")";
+function formatRaw(url) {
+  let returnValue = url;
   document.getElementById("output").innerHTML = returnValue;
 }
 
@@ -89,14 +61,18 @@ function formatSelection() {
       break;
     }
   }
+  let url = document.getElementById('url').value;
+  if (url == "") {
+    return;
+  }
+  if (document.getElementById('params').checked) {
+    url = stripParams(url)
+  }
   if ( formatSelect === "markdown"){
-    formatMarkdown();
+    formatMarkdown(url);
   }
-  if ( formatSelect === "amazon"){
-    formatAmazon();
-  }
-  if ( formatSelect === "reddit"){
-    formatReddit();
+  if ( formatSelect === "raw"){
+    formatRaw(url);
   }
 }
 
