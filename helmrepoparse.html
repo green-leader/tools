@@ -39,17 +39,33 @@
         parseYaml();
         });
         function parseYaml() {
-            const url = document.getElementById('url');
-            if (url.value == "") {
+            const urlInput = document.getElementById('url');
+            let urlValue = urlInput.value.trim();
+        
+            if (urlValue === "") {
                 return;
             }
-            fetch(url.value)
-                .then(r => r.text())
+        
+            // Logic: Append /index.yaml if it's missing
+            if (!urlValue.endsWith('/index.yaml')) {
+                // Ensure there's a slash between the base URL and index.yaml
+                urlValue = urlValue.replace(/\/$/, "") + '/index.yaml';
+            }
+        
+            fetch(urlValue)
+                .then(r => {
+                    if (!r.ok) throw new Error("Network response was not ok");
+                    return r.text();
+                })
                 .then(r => {
                     const yaml = jsyaml.load(r);
                     const tableBody = document.querySelector('#helmTable tbody');
-
-                    for( entry in yaml['entries']) {
+                    
+                    // Clear existing rows before adding new ones
+                    tableBody.innerHTML = "";
+        
+                    for (let entry in yaml['entries']) {
+                        // Helm index files usually store the latest version at index 0
                         let temp = yaml['entries'][entry][0];
                         let row = tableBody.insertRow();
                         row.insertCell().textContent = temp.name || '';
@@ -58,7 +74,10 @@
                         row.insertCell().textContent = temp.description || '';
                     }
                 })
-                .catch(err => console.error(err)); // Log any errors
+                .catch(err => {
+                    console.error(err);
+                    alert("Failed to fetch or parse the YAML file. Check the console for details.");
+                });
         }
     </script>
 </body>
