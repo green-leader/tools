@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
   </head>
   <body>
-    Sometimes adjusting URLs on your phone sucks.
+    Sometimes adjusting URLs sucks.
     <br>
     Rather opinionated as well.
     <br>
@@ -18,6 +18,8 @@
       <br>
       <input type="radio" id="markdown" name="formatStyle" value="markdown" checked>
       <label for="markdown">Markdown</label>
+      <input type="radio" id="html" name="formatStyle" value="html" checked>
+      <label for="html">HTML</label>
       <input type="radio" id="raw" name="formatStyle" value="raw">
       <label for="raw">Raw Link</label>
     </form>
@@ -25,12 +27,12 @@
     <label for="params">Strip Params</label>
     <br>
     <br>
-    <div id="output"></div>
+    <pre><code><div id="output"></div></code></pre>
 
     <script>
 function copyFunction() {
     var copyText = document.getElementById("output");
-    navigator.clipboard.writeText(copyText.innerHTML);
+    navigator.clipboard.writeText(copyText.innerText);
 }
 
 function stripParams(url) {
@@ -47,7 +49,17 @@ function formatMarkdown(url) {
   let returnValue = "[" + (linkText) + "](" + (url) + ")";
   document.getElementById("output").innerHTML = returnValue;
 }
- 
+
+function formatHTML(url) {
+  let linkText = url.replace(/\:\/\/www./i, "\:\/\/")
+  .replace(/https\:\/\/|http\:\/\//i, "")
+  .replace(/reddit.com|old.reddit.com/i, "");
+  linkText = stripParams(linkText);
+  // <a href="https://www.example.com/">example.com</a> 
+  let returnValue = "&lt;a href=\"" + url + "\"&gt;" + linkText + "&lt;/a&gt;";
+  document.getElementById("output").innerHTML = returnValue;
+}
+
 function formatRaw(url) {
   let returnValue = url;
   document.getElementById("output").innerHTML = returnValue;
@@ -71,6 +83,9 @@ function formatSelection() {
   }
   if ( formatSelect === "markdown"){
     formatMarkdown(url);
+  }
+  if ( formatSelect === "html"){
+    formatHTML(url);
   }
   if ( formatSelect === "raw"){
     formatRaw(url);
