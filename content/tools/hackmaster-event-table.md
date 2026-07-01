@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hackmaster Random Event Table</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-  </head>
-  <body>
-    <div id="output"></div>
-    <script>
++++
+date = '2026-07-01T11:00:41-06:00'
+draft = false
+title = 'Hackmaster Event Table'
++++
+{{< output-div >}}
+{{< js-inline >}}
 const eventTable = ["Spell dissolves in harmless puff of smoke",
 "Ears turn color - Temporarily",
 "Ears turn color - Permanently",
@@ -286,9 +282,6 @@ function generateEvent() {
 }
 
 document.getElementById("output").innerHTML = generateEvent();
-    </script>
-  </body>
-  <footer>
-    Hackmaster © 2024 by Kenzer & Company. All rights reserved. Hackmaster is a registered trademark of Kenzer & Company.
-  </footer>
-</html>
+{{< /js-inline >}}
+
+Hackmaster © 2024 by Kenzer & Company. All rights reserved. Hackmaster is a registered trademark of Kenzer & Company.

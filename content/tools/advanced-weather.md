@@ -1,20 +1,14 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Weather Generator</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-  </head>
-  <body>
-    <div id="output"></div>
++++
+date = '2026-07-01T10:48:25-06:00'
+draft = false
+title = 'Advanced Weather'
++++
+{{< output-div >}}
 
-    <br>
-    <br>
 
-    Random Starting weather, then we advance to weather that's more likely to happen next via steps.
+Random Starting weather, then we advance to weather that's more likely to happen next via steps.
 
-    <script>
+{{< js-inline >}}
 const weatherTable = ["Clear", "Partly Cloudy", "Mostly Cloudy", "Cloudy", "Precipitation", ];
 
 function setCookie(cname, cvalue, exdays) {
@@ -63,6 +57,4 @@ function generateCookieWeather() {
 }
 
 document.getElementById("output").innerHTML = generateCookieWeather();
-    </script>
-  </body>
-</html>
+{{< /js-inline >}}

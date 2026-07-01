@@ -1,20 +1,10 @@
-# spa
-Single Page Applications
+# Working 
 
-[Action Theme Generator](ActionTheme.html)
+Download a release matching what's showing in build.sh and extract hugo.
+https://github.com/gohugoio/hugo/releases/tag/v0.160.1
+`tar xvf hugo*.tar.gz hugo`
 
-[Fate Table](MythicFate.html)
+You may need to be able to run the hugo server from a github codespace. Here's the snippet to use `hugo server -D --appendPort=false --baseURL https://$CODESPACE_NAME-1313.$GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN`
 
-[Random IP Address](RandomIP.html)
-
-[Town Names](TownNames.html)
-
-[Basic Weather](BasicWeather.html)
-
-[Advanced Weather](AdvancedWeather.html)
-
-[URL Adjustment](URLAdjust.html)
-
-[Hackmaster Event Table](HackmasterEventTable.html)
-
-[Helm Repo Parser](helmrepoparse.html)
+Running locally could bring in the wrong theme information. Using the stylesheet from the theme and not from the statics folder which is the default override.
+`hugo serve -t terminal -D --disableFastRender`

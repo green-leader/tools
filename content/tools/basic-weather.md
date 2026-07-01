@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basic Weather Generator</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-  </head>
-  <body>
-    <div id="output"></div>
-
-    <script>
++++
+date = '2026-07-01T10:59:17-06:00'
+draft = false
+title = 'Basic Weather'
++++
+{{< output-div >}}
+{{< js-inline >}}
 const weatherTable = ["Sunny", "Cloudy", "Partly Cloudy", "Rainy", "Snowy", "Sleet", "Stormy", "Lightning", "Thunder", "Hail", "Windy", "Foggy", "Ice", "Tornado", "Rainbows", "Clear Sky"];
 
 function generateWeather() {
@@ -18,6 +13,4 @@ function generateWeather() {
 }
 
 document.getElementById("output").innerHTML = generateWeather();
-    </script>
-  </body>
-</html>
+{{< /js-inline >}}
